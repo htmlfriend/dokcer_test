@@ -1,16 +1,23 @@
-FROM ubuntu
+# FROM ubuntu
 
-RUN apt-get update && \
-	apt-get install -y curl && \
-	curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-	apt-get install -y nodejs && \
-	rm -rf /var/lib/apt/lists/* - clean computers
+# RUN apt-get update && \
+# 	apt-get install -y curl && \
+# 	curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+# 	apt-get install -y nodejs && \
+# 	rm -rf /var/lib/apt/lists/* - clean computers
+# ADD ./package.json /app/package.json
+# RUN npm i
+# ADD ./ /app
+# CMD node index.js
+# WORKDIR /app
 
+FROM alekzonder/puppeteer:latest
 ADD ./package.json /app/package.json
+WORKDIR /app
 RUN npm i
 ADD ./ /app
-CMD node index.js
-WORKDIR /app
+CMD npm run test
+
 
 
 # docker build . -t firstdocker
